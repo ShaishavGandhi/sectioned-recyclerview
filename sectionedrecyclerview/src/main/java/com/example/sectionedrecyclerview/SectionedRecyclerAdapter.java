@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
@@ -19,39 +20,72 @@ import java.util.TreeMap;
 public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
     Context mContext;
-    HashMap<Integer, ?> mMiscItems;
+    HashMap<Integer, Section> mMiscSections;
     NavigableMap<Integer, Section> mSections;
 
     public SectionedRecyclerAdapter(Context context) {
         mContext = context;
-        mMiscItems = new HashMap<>();
+        mMiscSections = new HashMap<>();
         mSections = new TreeMap<>();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return mSections.floorEntry(position).getKey();
+        if (mMiscSections != null && mMiscSections.containsKey(position)) {
+            return  13 * (position + 1);
+        }
+
+        position = getRefactoredPosition(position);
+        return (mSections.floorEntry(position).getKey() + 1) * 11;
     }
 
     @Override
     public int getItemCount() {
-        return mSections.lastKey() + mSections.lastEntry().getValue().getItemCount();
+        int count = 0;
+        if (mMiscSections != null) {
+            count = mMiscSections.size();
+        }
+        return mSections.lastKey() + mSections.lastEntry().getValue().getItemCount() + count;
     }
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        Section section = null;
 
-        Section section = mSections.floorEntry(viewType).getValue();
+        // Misc Section In Between
+        if (viewType % 13 == 0) {
+            section = mMiscSections.get((viewType / 13) - 1);
+        } else {
+            section = mSections.floorEntry(viewType / 11).getValue();
+        }
+
         View view = inflater.inflate(section.getLayout(), parent, false);
         return (VH)section.getViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        Section section = mSections.floorEntry(position).getValue();
-        int offsetPosition = position - mSections.floorEntry(position).getKey();
-        section.onBind(holder, offsetPosition);
+        if (mMiscSections != null && mMiscSections.containsKey(position)) {
+            Section section = mMiscSections.get(position);
+            section.onBind(holder, position);
+        } else {
+            position = getRefactoredPosition(position);
+            Section section = mSections.floorEntry(position).getValue();
+            int offsetPosition = position - mSections.floorEntry(position).getKey();
+            section.onBind(holder, offsetPosition);
+        }
+    }
+
+    private int getRefactoredPosition(int position) {
+        int offset = 0;
+        for (Map.Entry<Integer, Section> entry : mMiscSections.entrySet()) {
+            if (position > entry.getKey()) {
+                offset ++;
+            }
+        }
+
+        return position - offset;
     }
 
     public void addSection(Section section) {
@@ -67,5 +101,9 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         for (int i = 0; i < sectionList.size(); i++) {
             addSection(sectionList.get(i));
         }
+    }
+
+    public void addMiscSection(int position, Section section) {
+        mMiscSections.put(position, section);
     }
 }

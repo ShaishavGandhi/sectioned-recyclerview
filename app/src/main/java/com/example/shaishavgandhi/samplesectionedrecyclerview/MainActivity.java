@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sectionedrecyclerview.MiscItems;
 import com.example.sectionedrecyclerview.SectionedRecyclerAdapter;
 
 import java.util.ArrayList;
