@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 /**
  * Created by shaishav.gandhi on 11/19/16.
@@ -16,126 +18,54 @@ import java.util.List;
 
 public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
-    List<Section> mSections;
     Context mContext;
+    HashMap<Integer, ?> mMiscItems;
+    NavigableMap<Integer, Section> mSections;
 
     public SectionedRecyclerAdapter(Context context) {
         mContext = context;
+        mMiscItems = new HashMap<>();
+        mSections = new TreeMap<>();
     }
 
     @Override
     public int getItemViewType(int position) {
-        int count = mSections.get(0).getItemCount();
-
-        if (position < count) {
-            return 0;
-        }
-
-        for (int i = 1; i < mSections.size(); i++) {
-            count += mSections.get(i).getItemCount();
-            if (position < count) {
-                return 2 * i;
-            }
-        }
-
-        return count;
+        return mSections.floorEntry(position).getKey();
     }
 
     @Override
     public int getItemCount() {
-        int count = 0;
-
-        for (int i = 0; i < mSections.size(); i++) {
-            count += mSections.get(i).getItemCount();
-        }
-
-        return count;
+        return mSections.lastKey() + mSections.lastEntry().getValue().getItemCount();
     }
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        Section section = mSections.get(viewType / 2);
+        Section section = mSections.floorEntry(viewType).getValue();
         View view = inflater.inflate(section.getLayout(), parent, false);
         return (VH)section.getViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        getSection(position).onBind(holder, getSectionOffsetedPosition(position));
+        Section section = mSections.floorEntry(position).getValue();
+        int offsetPosition = position - mSections.floorEntry(position).getKey();
+        section.onBind(holder, offsetPosition);
     }
 
     public void addSection(Section section) {
-        if (mSections == null) {
-            mSections = new ArrayList<>();
+        if (mSections.size() == 0) {
+            mSections.put(0, section);
+        } else {
+            int newKey = mSections.lastEntry().getKey() + mSections.lastEntry().getValue().getItemCount();
+            mSections.put(newKey, section);
         }
-
-        mSections.add(section);
-
-    }
-
-    public void addSection(Section section, int position) {
-        if (mSections == null) {
-            mSections = new ArrayList<>();
-        }
-
-        mSections.add(position, section);
     }
 
     public void addSections(List<Section> sectionList) {
-        if (mSections == null) {
-            mSections = new ArrayList<>();
-        }
-
-        mSections.addAll(sectionList);
-    }
-
-    public void removeSection(int position) {
-        if (position < mSections.size()) {
-            mSections.remove(position);
+        for (int i = 0; i < sectionList.size(); i++) {
+            addSection(sectionList.get(i));
         }
     }
-
-    public void replaceSection(Section section, int position) {
-        if (position < mSections.size()) {
-            mSections.remove(position);
-            addSection(section, position);
-        }
-    }
-
-    private int getSectionOffsetedPosition(int position) {
-        int count = mSections.get(0).getItemCount();
-
-        if (position < count) {
-            return position;
-        }
-
-        for (int i = 1; i < mSections.size(); i++) {
-            count += mSections.get(i).getItemCount();
-            if (position < count) {
-                return mSections.get(i).getItemCount() - (count - position);
-            }
-        }
-
-        return position;
-    }
-
-    private Section getSection(int position) {
-        int count = mSections.get(0).getItemCount();
-
-        if (position < count) {
-            return mSections.get(0);
-        }
-
-        for (int i = 1; i < mSections.size(); i++) {
-            count += mSections.get(i).getItemCount();
-            if (position < count) {
-                return mSections.get(i);
-            }
-        }
-
-        return mSections.get(0);
-    }
-
 }
