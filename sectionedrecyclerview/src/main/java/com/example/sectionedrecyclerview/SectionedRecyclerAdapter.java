@@ -103,7 +103,21 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         }
     }
 
-    public void addMiscSection(int position, Section section) {
+    public void addSectionAt(int position, Section section) {
         mMiscSections.put(position, section);
+    }
+
+    public void removeSection(Section section) {
+        mSections.remove(section);
+    }
+
+    public void notifySectionInserted(int position) {
+        // Implement method here
+    }
+
+    public void notifySectionChanged(int position) {
+        int key = (int) mSections.keySet().toArray()[position];
+
+        notifyItemChanged(key, mSections.floorEntry(key).getValue().getItemCount());
     }
 }

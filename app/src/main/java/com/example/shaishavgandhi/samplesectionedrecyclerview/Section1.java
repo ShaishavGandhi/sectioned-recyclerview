@@ -65,4 +65,8 @@ public class Section1 extends Section<Section1.Section1Holder> {
             mTextView = (TextView) itemView.findViewById(R.id.text);
         }
     }
+
+    public void replaceData(List<String> mData) {
+        this.mData = mData;
+    }
 }

@@ -11,7 +11,6 @@ import java.util.List;
 
 public abstract class Section<VH extends RecyclerView.ViewHolder>{
 
-
     public abstract void onBind(VH holder, int position);
 
     public abstract int getLayout();
