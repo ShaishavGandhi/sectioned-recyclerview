@@ -21,12 +21,13 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
 
     Context mContext;
     HashMap<Integer, Section> mMiscSections;
-    NavigableMap<Integer, Section> mSections;
+//    NavigableMap<Integer, Section> mSections;
+    List<Section> mSections;
 
     public SectionedRecyclerAdapter(Context context) {
         mContext = context;
         mMiscSections = new HashMap<>();
-        mSections = new TreeMap<>();
+        mSections = new ArrayList<>();
     }
 
     @Override
@@ -36,7 +37,8 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         }
 
         position = getRefactoredPosition(position);
-        return (mSections.floorEntry(position).getKey() + 1) * 11;
+        SectionMap sectionMap = getSectionMap(position);
+        return mSections.indexOf(sectionMap.getSection());
     }
 
     @Override
@@ -45,7 +47,12 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         if (mMiscSections != null) {
             count = mMiscSections.size();
         }
-        return mSections.lastKey() + mSections.lastEntry().getValue().getItemCount() + count;
+
+        for (int i = 0; i < mSections.size(); i++) {
+            count += mSections.get(i).getItemCount();
+        }
+
+        return count;
     }
 
     @Override
@@ -54,10 +61,10 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         Section section = null;
 
         // Misc Section In Between
-        if (viewType % 13 == 0) {
+        if (viewType != 0 && viewType % 13 == 0) {
             section = mMiscSections.get((viewType / 13) - 1);
         } else {
-            section = mSections.floorEntry(viewType / 11).getValue();
+            section = mSections.get(viewType);
         }
 
         View view = inflater.inflate(section.getLayout(), parent, false);
@@ -71,9 +78,8 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
             section.onBind(holder, position);
         } else {
             position = getRefactoredPosition(position);
-            Section section = mSections.floorEntry(position).getValue();
-            int offsetPosition = position - mSections.floorEntry(position).getKey();
-            section.onBind(holder, offsetPosition);
+            SectionMap sectionMap = getSectionMap(position);
+            sectionMap.getSection().onBind(holder, position - sectionMap.getStartPosition());
         }
     }
 
@@ -89,12 +95,7 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
     }
 
     public void addSection(Section section) {
-        if (mSections.size() == 0) {
-            mSections.put(0, section);
-        } else {
-            int newKey = mSections.lastEntry().getKey() + mSections.lastEntry().getValue().getItemCount();
-            mSections.put(newKey, section);
-        }
+        mSections.add(section);
     }
 
     public void addSections(List<Section> sectionList) {
@@ -116,8 +117,20 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
     }
 
     public void notifySectionChanged(int position) {
-        int key = (int) mSections.keySet().toArray()[position];
+        SectionMap sectionMap = getSectionMap(position);
+        int startPosition = sectionMap.getStartPosition();
+        notifyItemChanged(startPosition, startPosition + sectionMap.getSection().getItemCount());
+    }
 
-        notifyItemChanged(key, mSections.floorEntry(key).getValue().getItemCount());
+    private SectionMap getSectionMap(int position) {
+        int count = 0;
+        SectionMap sectionMap = null;
+        for (int i = 0; i < mSections.size(); i++) {
+            count += mSections.get(i).getItemCount();
+            if (position < count) {
+                sectionMap = new SectionMap(count - mSections.get(i).getItemCount(), mSections.get(i));
+            }
+        }
+        return sectionMap;
     }
 }
