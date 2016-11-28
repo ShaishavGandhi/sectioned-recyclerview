@@ -117,9 +117,10 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
     }
 
     public void notifySectionChanged(int position) {
-        SectionMap sectionMap = getSectionMap(position);
+        Section section = mSections.get(position);
+        SectionMap sectionMap = getSectionMap(section);
         int startPosition = sectionMap.getStartPosition();
-        notifyItemChanged(startPosition, startPosition + sectionMap.getSection().getItemCount());
+        notifyItemRangeChanged(startPosition, startPosition + sectionMap.getSection().getItemCount());
     }
 
     private SectionMap getSectionMap(int position) {
@@ -128,6 +129,18 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         for (int i = 0; i < mSections.size(); i++) {
             count += mSections.get(i).getItemCount();
             if (position < count) {
+                sectionMap = new SectionMap(count - mSections.get(i).getItemCount(), mSections.get(i));
+            }
+        }
+        return sectionMap;
+    }
+
+    private SectionMap getSectionMap(Section section) {
+        int count = 0;
+        SectionMap sectionMap = null;
+        for (int i = 0; i < mSections.size(); i++) {
+            count += mSections.get(i).getItemCount();
+            if (mSections.get(i).equals(section)) {
                 sectionMap = new SectionMap(count - mSections.get(i).getItemCount(), mSections.get(i));
             }
         }
