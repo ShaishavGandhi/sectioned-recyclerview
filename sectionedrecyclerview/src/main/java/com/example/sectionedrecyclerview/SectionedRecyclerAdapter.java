@@ -118,10 +118,43 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
 
     public void notifySectionChanged(int position) {
         Section section = mSections.get(position);
+        notifySectionChanged(section);
+    }
+
+
+    public void notifySectionChanged(Section section) {
         SectionMap sectionMap = getSectionMap(section);
-        int startPosition = sectionMap.getStartPosition();
-//        notifyItemRangeInserted(startPosition, startPosition + sectionMap.getSection().getItemCount());
-        notifyDataSetChanged();
+        notifyItemRangeChanged(sectionMap.getStartPosition(), sectionMap.getStartPosition() + sectionMap.getSection().getItemCount());
+    }
+
+    public void notifySectionItemChanged(int position) {
+        SectionMap sectionMap = getSectionMap(position);
+        notifyItemChanged(sectionMap.getStartPosition() + position);
+    }
+
+    public void notifySectionItemRangeChanged(int startPosition, int lastPosition) {
+        SectionMap sectionMap = getSectionMap(startPosition);
+        notifyItemRangeChanged(sectionMap.getStartPosition() + startPosition, sectionMap.getStartPosition() + lastPosition);
+    }
+
+    public void notifySectionItemInserted(int position) {
+        SectionMap sectionMap = getSectionMap(position);
+        notifyItemInserted(sectionMap.getStartPosition() + position);
+    }
+
+    public void notifySectionItemRangeInserted(int startPosition, int lastPosition) {
+        SectionMap sectionMap = getSectionMap(startPosition);
+        notifyItemRangeInserted(sectionMap.getStartPosition() + startPosition, sectionMap.getStartPosition() + lastPosition);
+    }
+
+    public void notifySectionItemRemoved(int position) {
+        SectionMap sectionMap = getSectionMap(position);
+        notifyItemRemoved(sectionMap.getStartPosition() + position);
+    }
+
+    public void notifySectionItemRangeRemoved(int startPosition, int lastPosition) {
+        SectionMap sectionMap = getSectionMap(startPosition);
+        notifyItemRangeRemoved(sectionMap.getStartPosition() + startPosition, sectionMap.getStartPosition() + lastPosition);
     }
 
     private SectionMap getSectionMap(int position) {
