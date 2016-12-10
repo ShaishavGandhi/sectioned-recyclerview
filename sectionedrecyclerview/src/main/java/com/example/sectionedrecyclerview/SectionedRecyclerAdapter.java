@@ -112,8 +112,18 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         mSections.remove(section);
     }
 
+    public void removeSectionAt(int position) {
+        mSections.remove(position);
+    }
+
     public void notifySectionInserted(int position) {
-        // Implement method here
+        Section section = mSections.get(position);
+        notifySectionInserted(section);
+    }
+
+    public void notifySectionInserted(Section section) {
+        SectionMap sectionMap = getSectionMap(section);
+        notifyItemRangeInserted(sectionMap.getStartPosition(), sectionMap.getStartPosition() + sectionMap.getSection().getItemCount());
     }
 
     public void notifySectionChanged(int position) {
@@ -121,10 +131,15 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         notifySectionChanged(section);
     }
 
-
     public void notifySectionChanged(Section section) {
         SectionMap sectionMap = getSectionMap(section);
         notifyItemRangeChanged(sectionMap.getStartPosition(), sectionMap.getStartPosition() + sectionMap.getSection().getItemCount());
+    }
+
+    public void notifySectionRemoved(int position, int itemCount) {
+        SectionMap sectionMap = getSectionMap(mSections.get(position - 1));
+        int startPosition = sectionMap.getStartPosition() + sectionMap.getSection().getItemCount();
+        notifyItemRangeRemoved(startPosition, startPosition + itemCount);
     }
 
     public void notifySectionItemChanged(int position) {
