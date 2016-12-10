@@ -120,7 +120,8 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         Section section = mSections.get(position);
         SectionMap sectionMap = getSectionMap(section);
         int startPosition = sectionMap.getStartPosition();
-        notifyItemRangeChanged(startPosition, startPosition + sectionMap.getSection().getItemCount());
+//        notifyItemRangeInserted(startPosition, startPosition + sectionMap.getSection().getItemCount());
+        notifyDataSetChanged();
     }
 
     private SectionMap getSectionMap(int position) {
