@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.sectionedrecyclerview.Section;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Book;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,24 +19,24 @@ import java.util.List;
 public class Section2 extends Section<Section2.Section2Holder> {
 
 
-    List<String> mData;
+    List<Book> mData;
     Context mContext;
 
-    public Section2(Context context, List<String> data){
+    public Section2(Context context, List<Book> data){
         mData = data;
         mContext = context;
     }
 
     @Override
     public void onBind(Section2Holder holder, final int position) {
-        Picasso.with(mContext).load(mData.get(position)).into(holder.mImageView);
-
-        holder.mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, mData.get(position), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        Picasso.with(mContext).load(mData.get(position)).into(holder.mImageView);
+//
+//        holder.mImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(mContext, mData.get(position), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
