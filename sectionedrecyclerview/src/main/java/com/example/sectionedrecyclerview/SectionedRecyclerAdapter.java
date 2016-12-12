@@ -58,7 +58,7 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        Section section = null;
+        Section section;
 
         // Misc Section In Between
         if (viewType != 0 && viewType % 13 == 0) {
@@ -179,6 +179,7 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
             count += mSections.get(i).getItemCount();
             if (position < count) {
                 sectionMap = new SectionMap(count - mSections.get(i).getItemCount(), mSections.get(i));
+                break;
             }
         }
         return sectionMap;

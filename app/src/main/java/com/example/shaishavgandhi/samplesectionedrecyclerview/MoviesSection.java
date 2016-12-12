@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sectionedrecyclerview.Section;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Movie;
@@ -17,12 +16,12 @@ import java.util.List;
  * Created by shaishav.gandhi on 11/22/16.
  */
 
-public class Section1 extends Section<Section1.Section1Holder> {
+public class MoviesSection extends Section<MoviesSection.Section1Holder> {
 
     List<Movie> mData;
     Context mContext;
 
-    public Section1(Context context, List<Movie> mData) {
+    public MoviesSection(Context context, List<Movie> mData) {
         this.mData = mData;
         this.mContext = context;
     }

@@ -2,6 +2,7 @@ package com.example.shaishavgandhi.samplesectionedrecyclerview;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.sectionedrecyclerview.Section;
 
@@ -11,12 +12,12 @@ import java.util.List;
  * Created by shaishav.gandhi on 11/23/16.
  */
 
-public class Section3 extends Section<Section3.MiscSectionHolder> {
+public class HeaderSection extends Section<HeaderSection.MiscSectionHolder> {
 
 
     private List<String> mData;
 
-    public Section3(List<String> mData) {
+    public HeaderSection(List<String> mData) {
         this.mData = mData;
     }
 
@@ -28,7 +29,7 @@ public class Section3 extends Section<Section3.MiscSectionHolder> {
 
     @Override
     public int getLayout() {
-        return R.layout.list_misc_item;
+        return R.layout.list_item_header;
     }
 
     @Override
@@ -48,8 +49,11 @@ public class Section3 extends Section<Section3.MiscSectionHolder> {
 
     public static class MiscSectionHolder extends RecyclerView.ViewHolder {
 
+        TextView mView;
+
         public MiscSectionHolder(View itemView) {
             super(itemView);
+            mView = (TextView) itemView.findViewById(R.id.header);
         }
     }
 }

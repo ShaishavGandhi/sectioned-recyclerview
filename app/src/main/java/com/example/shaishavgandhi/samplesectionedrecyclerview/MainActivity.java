@@ -113,6 +113,32 @@ public class MainActivity extends AppCompatActivity {
         mMovies.add(movie3);
         mMovies.add(movie4);
         mMovies.add(movie5);
+
+        Book book = new Book();
+        book.setPoster("http://t1.gstatic.com/images?q=tbn:ANd9GcRBUelX9qRwyztKaeDcKNsCXtWjepsX35b_ufoBgfESxAZ71TLi");
+        book.setTitle("American Gods");
+        book.setAuthor("Neil Gaiman");
+
+        Book book1 = new Book();
+        book1.setPoster("http://t0.gstatic.com/images?q=tbn:ANd9GcSkSyi-AKY4GpMNnQZY5kU4avh26XcyakvZIoxrZzI9k2IynKBL");
+        book1.setTitle("The Fault In Our Stars");
+        book1.setAuthor("John Green");
+
+        Book book2 = new Book();
+        book2.setPoster("http://t2.gstatic.com/images?q=tbn:ANd9GcQJhGT7o4hghm3HbOhUGoKmFGwS96wXQseI9EcQPUc03ZbH6Qju");
+        book2.setTitle("Shantaram");
+        book2.setAuthor("Gregory David Roberts");
+
+        Book book3 = new Book();
+        book3.setPoster("http://t3.gstatic.com/images?q=tbn:ANd9GcTNZqA6r9dd4kiUrigFmOraXCD2z-pFvdyzRoR1xJ-Djh4lX8BZ");
+        book3.setTitle("Treasure Island");
+        book3.setAuthor("Robert Louis Stevenson");
+
+        mBooks.add(book);
+        mBooks.add(book1);
+        mBooks.add(book2);
+        mBooks.add(book3);
+
     }
 
 }
