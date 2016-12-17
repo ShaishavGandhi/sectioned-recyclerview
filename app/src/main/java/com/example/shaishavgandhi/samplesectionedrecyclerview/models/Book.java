@@ -9,6 +9,7 @@ public class Book {
     String title;
     String author;
     String poster;
+    String description;
 
     public String getTitle() {
         return title;
@@ -32,5 +33,13 @@ public class Book {
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

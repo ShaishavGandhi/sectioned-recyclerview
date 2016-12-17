@@ -118,21 +118,25 @@ public class MainActivity extends AppCompatActivity {
         book.setPoster("http://t1.gstatic.com/images?q=tbn:ANd9GcRBUelX9qRwyztKaeDcKNsCXtWjepsX35b_ufoBgfESxAZ71TLi");
         book.setTitle("American Gods");
         book.setAuthor("Neil Gaiman");
+        book.setDescription("Locked behind bars for three years, Shadow did his time, quietly waiting for the magic day when he could return to Eagle Point, Indiana. A man no longer scared of what tomorrow might bring, all he wanted was to be with Laura, the wife he deeply loved, and start a new life.");
 
         Book book1 = new Book();
         book1.setPoster("http://t0.gstatic.com/images?q=tbn:ANd9GcSkSyi-AKY4GpMNnQZY5kU4avh26XcyakvZIoxrZzI9k2IynKBL");
         book1.setTitle("The Fault In Our Stars");
         book1.setAuthor("John Green");
+        book1.setDescription("Despite the tumor-shrinking medical miracle that has bought her a few years, Hazel has never been anything but terminal, her final chapter inscribed upon diagnosis. But when a gorgeous plot twist named Augustus Waters suddenly appears at Cancer Kid Support Group, Hazel's story is about to be completely rewritten.");
 
         Book book2 = new Book();
         book2.setPoster("http://t2.gstatic.com/images?q=tbn:ANd9GcQJhGT7o4hghm3HbOhUGoKmFGwS96wXQseI9EcQPUc03ZbH6Qju");
         book2.setTitle("Shantaram");
         book2.setAuthor("Gregory David Roberts");
+        book2.setDescription("It took me a long time and most of the world to learn what I know about love and fate and the choices we make, but the heart of it came to me in an instant, while I was chained to a wall and being tortured.\n\nSo begins this epic, mesmerizing first novel set in the underworld of contemporary Bombay. Shantaram is narrated by Lin, an escaped convict with a false passport who flees maximum security prison in Australia for the teeming streets of a city where he can disappear.");
 
         Book book3 = new Book();
         book3.setPoster("http://t3.gstatic.com/images?q=tbn:ANd9GcTNZqA6r9dd4kiUrigFmOraXCD2z-pFvdyzRoR1xJ-Djh4lX8BZ");
         book3.setTitle("Treasure Island");
         book3.setAuthor("Robert Louis Stevenson");
+        book3.setDescription("The most popular pirate story ever written in English, featuring one of literature’s most beloved “bad guys,” Treasure Island has been happily devoured by several generations of boys—and girls—and grownups. Its unforgettable characters include: young Jim Hawkins, who finds himself owner of a map to Treasure Island, where the fabled pirate booty is buried; honest Captain Smollett, heroic Dr. Livesey, and the good-hearted but obtuse Squire Trelawney, who help Jim on his quest for the treasure; the frightening Blind Pew, double-dealing Israel Hands, and seemingly mad Ben Gunn, buccaneers of varying shades of menace; and, of course, garrulous, affable, ambiguous Long John Silver, who is one moment a friendly, laughing, one-legged sea-cook . . .and the next a dangerous pirate leader!");
 
         mBooks.add(book);
         mBooks.add(book1);
