@@ -33,11 +33,6 @@ public class HeaderSection extends Section<HeaderSection.MiscSectionHolder> {
     }
 
     @Override
-    public List<?> getData() {
-        return mData;
-    }
-
-    @Override
     public int getItemCount() {
         return mData.size();
     }

@@ -41,11 +41,6 @@ public class BooksSection extends Section<BooksSection.BooksHolder> {
     }
 
     @Override
-    public List<?> getData() {
-        return mData;
-    }
-
-    @Override
     public int getItemCount() {
         return mData.size();
     }

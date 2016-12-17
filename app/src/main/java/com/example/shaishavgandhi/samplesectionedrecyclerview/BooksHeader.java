@@ -26,11 +26,6 @@ public class BooksHeader extends Section<HeaderSection.MiscSectionHolder> {
     }
 
     @Override
-    public List<?> getData() {
-        return null;
-    }
-
-    @Override
     public int getItemCount() {
         return 1;
     }

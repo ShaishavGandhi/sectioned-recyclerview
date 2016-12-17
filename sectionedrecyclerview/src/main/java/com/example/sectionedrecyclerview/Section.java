@@ -15,8 +15,6 @@ public abstract class Section<VH extends RecyclerView.ViewHolder>{
 
     public abstract int getLayout();
 
-    public abstract List<?> getData();
-
     public abstract int getItemCount();
 
     public abstract VH getViewHolder(View view);
