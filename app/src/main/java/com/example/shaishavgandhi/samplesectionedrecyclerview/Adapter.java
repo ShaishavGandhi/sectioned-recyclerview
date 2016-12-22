@@ -1,6 +1,7 @@
 package com.example.shaishavgandhi.samplesectionedrecyclerview;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.sectionedrecyclerview.SectionedRecyclerAdapter;
@@ -31,20 +32,15 @@ public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
         addSection(moviesSection);
         addSection(new BooksHeader());
         addSection(booksSection);
-//        addSection(new Section2(context, mData2));
-////        List<String> misc = new ArrayList<>();
-////        misc.add("asd");
-////        addSectionAt(5, new Section3(misc));
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mData.add("Dimple");
-//                section1.replaceData(mData);
-//                notifySectionChanged(0);
-//            }
-//        }, 5000);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                NativeAd nativeAd = new NativeAd();
+                addSectionAt(4, nativeAd);
+                notifyDataSetChanged();
+            }
+        }, 5000);
     }
 
 }
