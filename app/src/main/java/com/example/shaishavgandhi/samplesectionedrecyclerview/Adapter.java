@@ -38,7 +38,7 @@ public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
             public void run() {
                 NativeAd nativeAd = new NativeAd();
                 addSectionAt(4, nativeAd);
-                notifyDataSetChanged();
+                notifySectionItemInserted(4);
             }
         }, 5000);
     }

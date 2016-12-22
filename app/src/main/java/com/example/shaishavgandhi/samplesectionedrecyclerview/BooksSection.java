@@ -1,6 +1,7 @@
 package com.example.shaishavgandhi.samplesectionedrecyclerview;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,6 +34,13 @@ public class BooksSection extends Section<BooksSection.BooksHolder> {
         holder.mAuthor.setText(mData.get(position).getAuthor());
         holder.mDescription.setText(mData.get(position).getDescription());
         Picasso.with(mContext).load(mData.get(position).getPoster()).into(holder.mPoster);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view,mData.get(position).getTitle(), Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
