@@ -94,6 +94,17 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         return position - offset;
     }
 
+    private int adapterToList(int position) {
+        int offset = 0;
+        for (Map.Entry<Integer, Section> entry : mMiscSections.entrySet()) {
+            if (position > entry.getKey()) {
+                offset ++;
+            }
+        }
+
+        return position + offset;
+    }
+
     public void addSection(Section section) {
         mSections.add(section);
     }
@@ -123,7 +134,7 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
 
     public void notifySectionInserted(Section section) {
         SectionMap sectionMap = getSectionMap(section);
-        notifyItemRangeInserted(sectionMap.getStartPosition(), sectionMap.getStartPosition() + sectionMap.getSection().getItemCount());
+        notifyItemRangeInserted(adapterToList(sectionMap.getStartPosition()), adapterToList(sectionMap.getStartPosition() + sectionMap.getSection().getItemCount()));
     }
 
     public void notifySectionChanged(int position) {
@@ -133,43 +144,43 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
 
     public void notifySectionChanged(Section section) {
         SectionMap sectionMap = getSectionMap(section);
-        notifyItemRangeChanged(sectionMap.getStartPosition(), sectionMap.getStartPosition() + sectionMap.getSection().getItemCount());
+        notifyItemRangeChanged(adapterToList(sectionMap.getStartPosition()), adapterToList(sectionMap.getStartPosition() + sectionMap.getSection().getItemCount()));
     }
 
     public void notifySectionRemoved(int position, int itemCount) {
         SectionMap sectionMap = getSectionMap(mSections.get(position - 1));
         int startPosition = sectionMap.getStartPosition() + sectionMap.getSection().getItemCount();
-        notifyItemRangeRemoved(startPosition, startPosition + itemCount);
+        notifyItemRangeRemoved(adapterToList(startPosition), adapterToList(startPosition + itemCount));
     }
 
-    public void notifySectionItemChanged(int position) {
-        SectionMap sectionMap = getSectionMap(position);
-        notifyItemChanged(sectionMap.getStartPosition() + position);
+    public void notifySectionItemChanged(Section section, int position) {
+        SectionMap sectionMap = getSectionMap(section);
+        notifyItemChanged(adapterToList(sectionMap.getStartPosition() + position));
     }
 
-    public void notifySectionItemRangeChanged(int startPosition, int lastPosition) {
-        SectionMap sectionMap = getSectionMap(startPosition);
-        notifyItemRangeChanged(sectionMap.getStartPosition() + startPosition, sectionMap.getStartPosition() + lastPosition);
+    public void notifySectionItemRangeChanged(Section section, int startPosition, int lastPosition) {
+        SectionMap sectionMap = getSectionMap(section);
+        notifyItemRangeChanged(adapterToList(sectionMap.getStartPosition() + startPosition), adapterToList(sectionMap.getStartPosition() + lastPosition));
     }
 
-    public void notifySectionItemInserted(int position) {
-        SectionMap sectionMap = getSectionMap(position);
-        notifyItemInserted(sectionMap.getStartPosition() + position);
+    public void notifySectionItemInserted(Section section, int position) {
+        SectionMap sectionMap = getSectionMap(section);
+        notifyItemInserted(adapterToList(sectionMap.getStartPosition() + position));
     }
 
-    public void notifySectionItemRangeInserted(int startPosition, int lastPosition) {
-        SectionMap sectionMap = getSectionMap(startPosition);
-        notifyItemRangeInserted(sectionMap.getStartPosition() + startPosition, sectionMap.getStartPosition() + lastPosition);
+    public void notifySectionItemRangeInserted(Section section, int startPosition, int lastPosition) {
+        SectionMap sectionMap = getSectionMap(section);
+        notifyItemRangeInserted(adapterToList(sectionMap.getStartPosition() + startPosition), adapterToList(sectionMap.getStartPosition() + lastPosition));
     }
 
-    public void notifySectionItemRemoved(int position) {
-        SectionMap sectionMap = getSectionMap(position);
-        notifyItemRemoved(sectionMap.getStartPosition() + position);
+    public void notifySectionItemRemoved(Section section, int position) {
+        SectionMap sectionMap = getSectionMap(section);
+        notifyItemRemoved(adapterToList(sectionMap.getStartPosition() + position));
     }
 
-    public void notifySectionItemRangeRemoved(int startPosition, int lastPosition) {
-        SectionMap sectionMap = getSectionMap(startPosition);
-        notifyItemRangeRemoved(sectionMap.getStartPosition() + startPosition, sectionMap.getStartPosition() + lastPosition);
+    public void notifySectionItemRangeRemoved(Section section, int startPosition, int lastPosition) {
+        SectionMap sectionMap = getSectionMap(section);
+        notifyItemRangeRemoved(adapterToList(sectionMap.getStartPosition() + startPosition), adapterToList(sectionMap.getStartPosition() + lastPosition));
     }
 
     private SectionMap getSectionMap(int position) {

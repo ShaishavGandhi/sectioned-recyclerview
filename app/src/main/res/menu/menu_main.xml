@@ -3,13 +3,23 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.example.shaishavgandhi.samplesectionedrecyclerview.MainActivity">
 
-    <item android:id="@+id/action_add_movie"
+    <item android:id="@+id/action_add_movie_at_start"
           android:orderInCategory="100"
-          android:title="Add Movie"
+          android:title="Add Movie At Start"
           app:showAsAction="never"/>
 
-    <item android:id="@+id/action_add_book"
+    <item android:id="@+id/action_add_movie_at_end"
           android:orderInCategory="100"
-          android:title="Add Book"
+          android:title="Add Movie At End"
+          app:showAsAction="never"/>
+
+    <item android:id="@+id/action_add_book_at_start"
+          android:orderInCategory="100"
+          android:title="Add Book At Start"
+          app:showAsAction="never"/>
+
+    <item android:id="@+id/action_add_book_at_end"
+          android:orderInCategory="100"
+          android:title="Add Book At End"
           app:showAsAction="never"/>
 </menu>

@@ -18,16 +18,22 @@ import java.util.List;
 public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
+    private MoviesSection mMoviesSection;
+    private BooksSection mBooksSection;
 
     public Adapter(Context context, final List<Movie> mData, List<Book> mData2) {
         super(context);
 
-        final MoviesSection moviesSection = new MoviesSection(context, mData);
+        mContext = context;
+
+        MoviesSection moviesSection = new MoviesSection(context, mData);
+        mMoviesSection = moviesSection;
         List<String> mHeader = new ArrayList<>();
         mHeader.add("misc");
         HeaderSection headerSection = new HeaderSection(mHeader);
 
-        final BooksSection booksSection = new BooksSection(context, mData2);
+        BooksSection booksSection = new BooksSection(context, mData2);
+        mBooksSection = booksSection;
         addSection(headerSection);
         addSection(moviesSection);
         addSection(new BooksHeader());
@@ -38,9 +44,29 @@ public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
             public void run() {
                 NativeAd nativeAd = new NativeAd();
                 addSectionAt(4, nativeAd);
-                notifySectionItemInserted(4);
+                notifyItemInserted(4);
             }
         }, 5000);
+    }
+
+    public void addMovie(Movie movie, int position) {
+        mMoviesSection.mData.add(position, movie);
+        notifySectionItemInserted(mMoviesSection, position);
+    }
+
+    public void addMovie(Movie movie) {
+        mMoviesSection.mData.add(movie);
+        notifySectionItemInserted(mMoviesSection, mMoviesSection.mData.size() - 1);
+    }
+
+    public void addBook(Book book, int position) {
+        mBooksSection.mData.add(position, book);
+        notifySectionItemInserted(mBooksSection, position);
+    }
+
+    public void addBook(Book book) {
+        mBooksSection.mData.add(book);
+        notifySectionItemInserted(mBooksSection, mBooksSection.mData.size() - 1);
     }
 
 }

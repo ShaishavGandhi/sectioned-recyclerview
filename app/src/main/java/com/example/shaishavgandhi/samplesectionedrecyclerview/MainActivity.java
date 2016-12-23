@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Book;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Movie;
@@ -21,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     List<Movie> mMovies;
     List<Book> mBooks;
+
+    List<Movie> extraMovies;
+    List<Book> extraBooks;
+
+    Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +53,57 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         populateData();
+        populateExtraData();
 
-        Adapter adapter = new Adapter(this, mMovies, mBooks);
+        adapter = new Adapter(this, mMovies, mBooks);
         mRecyclerView.setAdapter(adapter);
 
 
+    }
+
+    private void populateExtraData() {
+        Movie movie = new Movie();
+        movie.setTitle("Pulp Fiction");
+        movie.setPoster("https://images-na.ssl-images-amazon.com/images/M/MV5BMjI5MzgxMTQ4M15BMl5BanBnXkFtZTgwNjczMTk0NzE@._V1_UX477_CR0,0,477,268_AL_.jpg");
+        movie.setDescription("The lives of two mob hit men, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.");
+
+        Movie movie1 = new Movie();
+        movie1.setTitle("Fight Club");
+        movie1.setPoster("https://images-na.ssl-images-amazon.com/images/M/MV5BMjEwNjY2NTc4MF5BMl5BanBnXkFtZTgwMTk2MTQ0NzE@._V1_CR0,60,640,360_AL_UX477_CR0,0,477,268_AL_.jpg");
+        movie1.setDescription("An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more.");
+
+        Movie movie2 = new Movie();
+        movie2.setTitle("Forrest Gump");
+        movie2.setPoster("https://images-na.ssl-images-amazon.com/images/M/MV5BMTU5MjI1MjUyOV5BMl5BanBnXkFtZTgwNzc1NTU0NzE@._V1_CR0,60,640,360_AL_UX477_CR0,0,477,268_AL_.jpg");
+        movie2.setDescription("Forrest Gump, while not intelligent, has accidentally been present at many historic moments, but his true love, Jenny Curran, eludes him.");
+
+        extraMovies = new ArrayList<>();
+        extraMovies.add(movie);
+        extraMovies.add(movie1);
+        extraMovies.add(movie2);
+
+        Book book = new Book();
+        book.setTitle("The Foundation");
+        book.setPoster("https://images.gr-assets.com/books/1417900846l/29579.jpg");
+        book.setAuthor("Isaac Asimov");
+        book.setDescription("For twelve thousand years the Galactic Empire has ruled supreme. Now it is dying. But only Hari Seldon, creator of the revolutionary science of psychohistory, can see into the future -- to a dark age of ignorance, barbarism, and warfare that will last thirty thousand years. To preserve knowledge and save mankind, Seldon gathers the best minds in the Empire -- both scientists and scholars -- and brings them to a bleak planet at the edge of the Galaxy to serve as a beacon of hope for a future generations. He calls his sanctuary the Foundation.");
+
+        Book book1 = new Book();
+        book1.setTitle("Midnight's Children");
+        book1.setAuthor("Salman Rushdie");
+        book1.setPoster("https://images.gr-assets.com/books/1371063511l/14836.jpg");
+        book1.setDescription("Born at the stroke of midnight, at the precise moment of India's independence, Saleem Sinai is destined from birth to be special. For he is one of 1,001 children born in the midnight hour, children who all have special gifts, children with whom Saleem is telepathically linked.");
+
+        Book book2 = new Book();
+        book2.setTitle("War and Peace");
+        book2.setAuthor("Leo Tolstoy");
+        book2.setPoster("https://images.gr-assets.com/books/1413215930l/656.jpg");
+        book2.setDescription("Tolstoy's epic masterpiece intertwines the lives of private and public individuals during the time of the Napoleonic wars and the French invasion of Russia. The fortunes of the Rostovs and the Bolkonskys, of Pierre, Natasha, and Andrei, are intimately connected with the national history that is played out in parallel with their lives. Balls and soirees alternate with councils of war and the machinations of statesmen and generals, scenes of violent battles with everyday human passions in a work whose extraordinary imaginative power has never been surpassed. ");
+
+        extraBooks = new ArrayList<>();
+        extraBooks.add(book);
+        extraBooks.add(book1);
+        extraBooks.add(book2);
     }
 
     @Override
@@ -69,15 +121,63 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add_book) {
+        if (id == R.id.action_add_book_at_start) {
+            addBook(0);
             return true;
         }
 
-        if (id == R.id.action_add_movie) {
+        if (id == R.id.action_add_book_at_end) {
+            addBook();
+            return true;
+        }
+
+        if (id == R.id.action_add_movie_at_start) {
+            addMovie(0);
+            return true;
+        }
+
+        if (id == R.id.action_add_movie_at_end) {
+            addMovie();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addBook(int position) {
+        if (extraBooks.size() > 0) {
+            adapter.addBook(extraBooks.get(0), position);
+            extraBooks.remove(0);
+        } else {
+            Toast.makeText(getApplicationContext(), "No more movies left", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void addBook() {
+        if (extraBooks.size() > 0) {
+            adapter.addBook(extraBooks.get(0));
+            extraBooks.remove(0);
+        } else {
+            Toast.makeText(getApplicationContext(), "No more movies left", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void addMovie(int position) {
+        if (extraMovies.size() > 0) {
+            adapter.addMovie(extraMovies.get(0), position);
+            extraMovies.remove(0);
+        } else {
+            Toast.makeText(getApplicationContext(), "No more movies left", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void addMovie() {
+        if (extraMovies.size() > 0) {
+            adapter.addMovie(extraMovies.get(0));
+            extraMovies.remove(0);
+        } else {
+            Toast.makeText(getApplicationContext(), "No more movies left", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void populateData() {
