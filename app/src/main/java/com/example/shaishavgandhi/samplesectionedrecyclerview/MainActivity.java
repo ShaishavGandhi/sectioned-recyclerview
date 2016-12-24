@@ -141,6 +141,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_remove_movie_at_start) {
+            removeMovie(0);
+        }
+
+        if (id == R.id.action_remove_movie_at_end) {
+            removeMovie();
+        }
+
+        if (id == R.id.action_remove_book_at_start) {
+            removeBook(0);
+        }
+
+        if (id == R.id.action_remove_book_at_end) {
+            removeBook();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -178,6 +194,22 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "No more movies left", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void removeMovie() {
+        adapter.removeMovie();
+    }
+
+    private void removeMovie(int position) {
+        adapter.removeMovie(position);
+    }
+
+    private void removeBook() {
+        adapter.removeBook();
+    }
+
+    private void removeBook(int position) {
+        adapter.removeBook(position);
     }
 
     private void populateData() {

@@ -22,4 +22,24 @@
           android:orderInCategory="100"
           android:title="Add Book At End"
           app:showAsAction="never"/>
+
+    <item android:id="@+id/action_remove_movie_at_start"
+          android:orderInCategory="100"
+          android:title="Remove Movie At Start"
+          app:showAsAction="never"/>
+
+    <item android:id="@+id/action_remove_movie_at_end"
+          android:orderInCategory="100"
+          android:title="Remove Movie At End"
+          app:showAsAction="never"/>
+
+    <item android:id="@+id/action_remove_book_at_start"
+          android:orderInCategory="100"
+          android:title="Remove Book At Start"
+          app:showAsAction="never"/>
+
+    <item android:id="@+id/action_remove_book_at_end"
+          android:orderInCategory="100"
+          android:title="Remove Book At End"
+          app:showAsAction="never"/>
 </menu>

@@ -69,4 +69,25 @@ public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
         notifySectionItemInserted(mBooksSection, mBooksSection.mData.size() - 1);
     }
 
+    public void removeMovie() {
+        int position = mMoviesSection.mData.size() - 1;
+        removeMovie(position);
+    }
+
+    public void removeMovie(int position) {
+        mMoviesSection.mData.remove(position);
+        notifySectionItemRemoved(mMoviesSection, position);
+    }
+
+    public void removeBook() {
+        int position = mBooksSection.mData.size() - 1;
+        removeBook(position);
+    }
+
+    public void removeBook(int position) {
+        mBooksSection.mData.remove(position);
+        notifySectionItemRemoved(mBooksSection, position);
+    }
+
+
 }
