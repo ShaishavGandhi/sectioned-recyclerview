@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.example.shaishavgandhi.samplesectionedrecyclerview.MainActivity">
+      tools:context="com.example.shaishavgandhi.samplesectionedrecyclerview.activities.MainActivity">
 
     <item android:id="@+id/action_add_movie_at_start"
           android:orderInCategory="100"

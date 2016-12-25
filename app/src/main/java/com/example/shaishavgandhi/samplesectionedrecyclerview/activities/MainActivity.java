@@ -1,4 +1,4 @@
-package com.example.shaishavgandhi.samplesectionedrecyclerview;
+package com.example.shaishavgandhi.samplesectionedrecyclerview.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.shaishavgandhi.samplesectionedrecyclerview.adapters.Adapter;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.R;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Book;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Movie;
 

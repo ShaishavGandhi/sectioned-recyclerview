@@ -1,4 +1,4 @@
-package com.example.shaishavgandhi.samplesectionedrecyclerview;
+package com.example.shaishavgandhi.samplesectionedrecyclerview.sections;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;
@@ -8,28 +8,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sectionedrecyclerview.Section;
-import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Movie;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.R;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Book;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 /**
- * Created by shaishav.gandhi on 11/22/16.
+ * Created by shaishav.gandhi on 11/20/16.
  */
 
-public class MoviesSection extends Section<MoviesSection.Section1Holder> {
+public class BooksSection extends Section<BooksSection.BooksHolder> {
 
-    List<Movie> mData;
+
+    public List<Book> mData;
     Context mContext;
 
-    public MoviesSection(Context context, List<Movie> mData) {
-        this.mData = mData;
-        this.mContext = context;
+    public BooksSection(Context context, List<Book> data){
+        mData = data;
+        mContext = context;
     }
 
     @Override
-    public void onBind(Section1Holder holder, final int position) {
+    public void onBind(BooksHolder holder, final int position) {
         holder.mTitle.setText(mData.get(position).getTitle());
+        holder.mAuthor.setText(mData.get(position).getAuthor());
         holder.mDescription.setText(mData.get(position).getDescription());
         Picasso.with(mContext).load(mData.get(position).getPoster()).into(holder.mPoster);
 
@@ -43,7 +46,7 @@ public class MoviesSection extends Section<MoviesSection.Section1Holder> {
 
     @Override
     public int getLayout() {
-        return R.layout.list_item_movie;
+        return R.layout.list_item_books;
     }
 
     @Override
@@ -52,26 +55,25 @@ public class MoviesSection extends Section<MoviesSection.Section1Holder> {
     }
 
     @Override
-    public Section1Holder getViewHolder(View view) {
-        return new Section1Holder(view);
+    public BooksHolder getViewHolder(View view) {
+        return new BooksHolder(view);
     }
 
-    public static class Section1Holder extends RecyclerView.ViewHolder {
+    public static class BooksHolder extends RecyclerView.ViewHolder {
 
         TextView mTitle;
         TextView mDescription;
         ImageView mPoster;
+        TextView mAuthor;
 
-        public Section1Holder(View itemView) {
+        public BooksHolder(View itemView) {
             super(itemView);
 
             mTitle = (TextView) itemView.findViewById(R.id.title);
             mDescription = (TextView) itemView.findViewById(R.id.description);
             mPoster = (ImageView) itemView.findViewById(R.id.poster);
+            mAuthor = (TextView) itemView.findViewById(R.id.author);
         }
     }
 
-    public void replaceData(List<Movie> mData) {
-        this.mData = mData;
-    }
 }

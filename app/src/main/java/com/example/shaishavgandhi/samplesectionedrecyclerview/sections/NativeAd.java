@@ -1,8 +1,10 @@
-package com.example.shaishavgandhi.samplesectionedrecyclerview;
+package com.example.shaishavgandhi.samplesectionedrecyclerview.sections;
 
 import android.view.View;
 
 import com.example.sectionedrecyclerview.Section;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.R;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.ViewHolders;
 
 /**
  * Created by shaishav.gandhi on 12/21/16.

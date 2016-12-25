@@ -1,10 +1,11 @@
-package com.example.shaishavgandhi.samplesectionedrecyclerview;
+package com.example.shaishavgandhi.samplesectionedrecyclerview.sections;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.sectionedrecyclerview.Section;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.R;
 
 import java.util.List;
 
@@ -12,19 +13,14 @@ import java.util.List;
  * Created by shaishav.gandhi on 11/23/16.
  */
 
-public class HeaderSection extends Section<HeaderSection.MiscSectionHolder> {
+public class MoviesHeader extends Section<MoviesHeader.MiscSectionHolder> {
 
-
-    private List<String> mData;
-
-    public HeaderSection(List<String> mData) {
-        this.mData = mData;
+    public MoviesHeader() {
     }
 
     @Override
     public void onBind(MiscSectionHolder holder, int position) {
         // Do nothing
-        holder.getAdapterPosition();
     }
 
     @Override
@@ -34,7 +30,7 @@ public class HeaderSection extends Section<HeaderSection.MiscSectionHolder> {
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return 1;
     }
 
     @Override

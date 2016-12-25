@@ -1,4 +1,4 @@
-package com.example.shaishavgandhi.samplesectionedrecyclerview;
+package com.example.shaishavgandhi.samplesectionedrecyclerview.adapters;
 
 import android.content.Context;
 import android.os.Handler;
@@ -7,6 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import com.example.sectionedrecyclerview.SectionedRecyclerAdapter;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Book;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Movie;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.BooksHeader;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.BooksSection;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.MoviesHeader;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.MoviesSection;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.NativeAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,18 +31,15 @@ public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
 
         mContext = context;
 
-        MoviesSection moviesSection = new MoviesSection(context, mData);
-        mMoviesSection = moviesSection;
-        List<String> mHeader = new ArrayList<>();
-        mHeader.add("misc");
-        HeaderSection headerSection = new HeaderSection(mHeader);
+        mMoviesSection = new MoviesSection(context, mData);
+        mBooksSection = new BooksSection(context, mData2);
 
-        BooksSection booksSection = new BooksSection(context, mData2);
-        mBooksSection = booksSection;
-        addSection(headerSection);
-        addSection(moviesSection);
+        addSection(new MoviesHeader());
+        addSection(mMoviesSection);
         addSection(new BooksHeader());
-        addSection(booksSection);
+        addSection(mBooksSection);
+
+        // Add a ad after 5 seconds
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
