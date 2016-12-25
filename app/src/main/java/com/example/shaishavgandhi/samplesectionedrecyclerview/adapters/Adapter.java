@@ -5,15 +5,14 @@ import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.sectionedrecyclerview.SectionedRecyclerAdapter;
-import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Book;
-import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Movie;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.data.models.Book;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.data.models.Movie;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.BooksHeader;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.BooksSection;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.MoviesHeader;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.MoviesSection;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.sections.NativeAd;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,13 +25,13 @@ public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
     private MoviesSection mMoviesSection;
     private BooksSection mBooksSection;
 
-    public Adapter(Context context, final List<Movie> mData, List<Book> mData2) {
+    public Adapter(Context context, final List<Movie> mMovies, List<Book> mBooks) {
         super(context);
 
         mContext = context;
 
-        mMoviesSection = new MoviesSection(context, mData);
-        mBooksSection = new BooksSection(context, mData2);
+        mMoviesSection = new MoviesSection(context, mMovies);
+        mBooksSection = new BooksSection(context, mBooks);
 
         addSection(new MoviesHeader());
         addSection(mMoviesSection);

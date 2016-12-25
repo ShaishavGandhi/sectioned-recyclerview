@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.sectionedrecyclerview.Section;
 import com.example.shaishavgandhi.samplesectionedrecyclerview.R;
-import com.example.shaishavgandhi.samplesectionedrecyclerview.models.Movie;
+import com.example.shaishavgandhi.samplesectionedrecyclerview.data.models.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.shaishavgandhi.samplesectionedrecyclerview.models;
+package com.example.shaishavgandhi.samplesectionedrecyclerview.data.models;
 
 /**
  * Created by shaishav.gandhi on 12/11/16.
