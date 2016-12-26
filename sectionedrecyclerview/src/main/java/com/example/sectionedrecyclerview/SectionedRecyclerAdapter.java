@@ -109,8 +109,10 @@ public abstract class SectionedRecyclerAdapter<VH extends RecyclerView.ViewHolde
         return position + offset;
     }
 
-    public void addSection(Section section) {
-        mSections.add(section);
+    public void addSection(Section... sections) {
+        for (Section section : sections) {
+            mSections.add(section);
+        }
     }
 
     public void addSections(List<Section> sectionList) {

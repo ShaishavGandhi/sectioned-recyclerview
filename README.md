@@ -79,8 +79,7 @@ public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
         mMoviesSection = new MoviesSection(context, mMovies);
         mBooksSection = new BooksSection(context, mBooks);
 
-        addSection(mMoviesSection);
-        addSection(mBooksSection);
+        addSection(mMoviesSection, mBooksSection);
     }
 }
 ```

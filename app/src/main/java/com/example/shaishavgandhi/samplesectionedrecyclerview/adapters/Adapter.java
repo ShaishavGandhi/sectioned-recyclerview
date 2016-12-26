@@ -33,10 +33,7 @@ public class Adapter extends SectionedRecyclerAdapter<RecyclerView.ViewHolder> {
         mMoviesSection = new MoviesSection(context, mMovies);
         mBooksSection = new BooksSection(context, mBooks);
 
-        addSection(new MoviesHeader());
-        addSection(mMoviesSection);
-        addSection(new BooksHeader());
-        addSection(mBooksSection);
+        addSection(new MoviesHeader(), mMoviesSection, new BooksHeader(), mBooksSection);
 
         // Add a ad after 5 seconds
         Handler handler = new Handler();
