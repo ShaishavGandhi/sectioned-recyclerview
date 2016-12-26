@@ -18,7 +18,7 @@ import java.util.List;
  * Created by shaishav.gandhi on 11/22/16.
  */
 
-public class MoviesSection extends Section<MoviesSection.Section1Holder> {
+public class MoviesSection extends Section<MoviesSection.MoviesHolder> {
 
     public List<Movie> mData;
     Context mContext;
@@ -29,7 +29,7 @@ public class MoviesSection extends Section<MoviesSection.Section1Holder> {
     }
 
     @Override
-    public void onBind(Section1Holder holder, final int position) {
+    public void onBind(MoviesHolder holder, final int position) {
         holder.mTitle.setText(mData.get(position).getTitle());
         holder.mDescription.setText(mData.get(position).getDescription());
         Picasso.with(mContext).load(mData.get(position).getPoster()).into(holder.mPoster);
@@ -53,17 +53,17 @@ public class MoviesSection extends Section<MoviesSection.Section1Holder> {
     }
 
     @Override
-    public Section1Holder getViewHolder(View view) {
-        return new Section1Holder(view);
+    public MoviesHolder getViewHolder(View view) {
+        return new MoviesHolder(view);
     }
 
-    public static class Section1Holder extends RecyclerView.ViewHolder {
+    public static class MoviesHolder extends RecyclerView.ViewHolder {
 
         TextView mTitle;
         TextView mDescription;
         ImageView mPoster;
 
-        public Section1Holder(View itemView) {
+        public MoviesHolder(View itemView) {
             super(itemView);
 
             mTitle = (TextView) itemView.findViewById(R.id.title);
