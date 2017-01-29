@@ -11,7 +11,7 @@
     android:paddingRight="8dp"
     android:paddingTop="8dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.shaishavgandhi.samplesectionedrecyclerview.activities.MainActivity"
+    tools:context="com.library.shaishavgandhi.samplesectionedrecyclerview.activities.MainActivity"
     android:background="#e5e5e5"
     tools:showIn="@layout/activity_main">
 
